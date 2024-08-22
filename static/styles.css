@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: solid 1px black;
+ }
+ 
+ 
+ html {
+    height: 100%;
+ }
+ 
+ 
+ body {
+    width: 100%;
+    height: 100%;
+ }
+ 
+ 
+ .container {
+    padding: 20px;
+    width: 55%;
+    height: 85%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 2fr 7fr;
+    row-gap: 10px;
+    column-gap: 10px;
+ }
+ 
+ 
+ .season-summary {
+    display: grid;
+    grid-template-rows: 1fr 3fr 3fr 3fr;
+ }
+ 
+ 
+ .season-stats {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+ }
+ 
+ img {
+   width: 50px;
+   height: 50px;
+ }
