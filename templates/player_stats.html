@@ -1,32 +1,61 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8"/>
-		<link rel="stylesheet" href="../static/styles.css"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	</head>
-	<body>
-		<div class="container">
-			<div class="picture">
-				<img src="https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png"/>
-			</div>
-			<div class="player-info">
-				<div class="stat-nav-bar"></div>
-			</div>
-			<div class="season-summary">
-				<div class="'season-years"></div>
-				<div class="pg-stat"></div>
-				<div class="pg-stat"></div>
-				<div class="pg-stat"></div>
-			</div>
-			<div class="season-stats">
-				<div class="reg-season">
-					<div class="season-label"></div>
-				</div>
-				<div class="post-season">
-					<div class="season-label"></div>
-				</div>
-			</div>
-		</div>
-	</body>
-</html>
+{% extends "player_base.html" %}
+{% block reg_season_stats %}
+    {% for row in reg_season %}
+        {% set stats_row = row[1] %}
+        <tr>
+            <th>{{ stats_row['SEASON_ID'] }}</th>
+            <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
+            <th>{{ stats_row['GP'] }}</th>
+            <th>{{ stats_row['GS'] }}</th>
+            <th>{{ stats_row['MIN'] }}</th>
+            <th>{{ stats_row['PTS'] }}</th>
+            <th>{{ stats_row['REB'] }}</th>
+            <th>{{ stats_row['AST'] }}</th>
+            <th>{{ stats_row['STL'] }}</th>
+            <th>{{ stats_row['BLK'] }}</th>
+            <th>{{ stats_row['FGM'] }}</th>
+            <th>{{ stats_row['FGA'] }}</th>
+            <th>{{ stats_row['FG_PCT'] }}</th>
+            <th>{{ stats_row['FG3M'] }}</th>
+            <th>{{ stats_row['FG3A'] }}</th>
+            <th>{{ stats_row['FG3_PCT'] }}</th>
+            <th>{{ stats_row['FTM'] }}</th>
+            <th>{{ stats_row['FTA'] }}</th>
+            <th>{{ stats_row['FT_PCT'] }}</th>
+            <th>{{ stats_row['OREB'] }}</th>
+            <th>{{ stats_row['DREB'] }}</th>
+            <th>{{ stats_row['TOV'] }}</th>
+            <th>{{ stats_row['PF'] }}</th>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block post_season_stats %}
+    {% for row in post_season %}
+        {% set stats_row = row[1] %}
+        <tr>
+            <th>{{ stats_row['SEASON_ID'] }}</th>
+            <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
+            <th>{{ stats_row['GP'] }}</th>
+            <th>{{ stats_row['GS'] }}</th>
+            <th>{{ stats_row['MIN'] }}</th>
+            <th>{{ stats_row['PTS'] }}</th>
+            <th>{{ stats_row['REB'] }}</th>
+            <th>{{ stats_row['AST'] }}</th>
+            <th>{{ stats_row['STL'] }}</th>
+            <th>{{ stats_row['BLK'] }}</th>
+            <th>{{ stats_row['FGM'] }}</th>
+            <th>{{ stats_row['FGA'] }}</th>
+            <th>{{ stats_row['FG_PCT'] }}</th>
+            <th>{{ stats_row['FG3M'] }}</th>
+            <th>{{ stats_row['FG3A'] }}</th>
+            <th>{{ stats_row['FG3_PCT'] }}</th>
+            <th>{{ stats_row['FTM'] }}</th>
+            <th>{{ stats_row['FTA'] }}</th>
+            <th>{{ stats_row['FT_PCT'] }}</th>
+            <th>{{ stats_row['OREB'] }}</th>
+            <th>{{ stats_row['DREB'] }}</th>
+            <th>{{ stats_row['TOV'] }}</th>
+            <th>{{ stats_row['PF'] }}</th>
+        </tr>
+    {% endfor %}
+{% endblock %}

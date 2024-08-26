@@ -6,42 +6,88 @@
  }
  
  
- html {
-    height: 100%;
- }
+html {
+   height: 100%;
+}
  
  
- body {
-    width: 100%;
-    height: 100%;
- }
+body {
+   width: 100%;
+   height: 100%;
+}
+
+img {
+   width: 100%;
+   height: 100%;
+}
  
+.container {
+   display: grid;
+   padding: 20px;
+   width: 50%;
+   height: 85%;
+   margin: auto;
+   grid-template-columns: 200px auto;
+   grid-template-rows: 146px repeat(5, 1fr);
+   row-gap: 15px;
+   column-gap: 15px;
+}
+
+.info {
+   display: grid;
+   grid-template-rows: repeat(6, 1fr);
+}
+
+.bio {
+   display: flex;
+   grid-row: 1 / 6;
+   align-items: center;
+   padding: 20px;
+}
+
+.stat-nav-bar {
+   grid-row: 6;
+}
  
- .container {
-    padding: 20px;
-    width: 55%;
-    height: 85%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 2fr 7fr;
-    row-gap: 10px;
-    column-gap: 10px;
- }
- 
- 
- .season-summary {
-    display: grid;
-    grid-template-rows: 1fr 3fr 3fr 3fr;
- }
- 
- 
- .season-stats {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
- }
- 
- img {
-   width: 50px;
-   height: 50px;
- }
+.summary {
+   display: grid;
+   grid-template-rows: 1fr 10fr;
+   grid-row: 2 / 5 ;
+}
+
+ul {
+   display: flex;
+   list-style-type: none;
+   flex-direction: column;
+   justify-content: space-between;
+   padding: 35px 0;
+}
+
+.pg-stat div {
+   text-align: center;
+}
+
+.pg-value {
+   font-size: 1.5rem;
+}
+
+.years {
+   text-align: center;
+   margin: auto;
+}
+
+.stats {
+   display: flex;
+   flex-direction: column;
+   grid-row: 2;
+}
+
+.overflow-x-hidden {
+   overflow-x: hidden;
+}
+
+.stat-table {
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+}
