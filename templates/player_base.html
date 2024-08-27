@@ -12,30 +12,19 @@
 			</div>
 			<div class="info">
 				<div class="bio">
-					<div class="name">Luka Doncic</div>
+					<div class="name">
+						<p id="name">Luka Doncic</p>
+					</div>
 					<div class="team-info">Mavericks</div>
 				</div>
 				<div class="stat-nav-bar">hi</div>
 			</div>
 			<div class="summary">
-				<div class="years">2023-24</div>
-				<ul class="per-game-stats">
-					<li class="pg-stat">
-						<div class="pg-label">PTS</div>
-						<div class="pg-value">33</div>
-					</li>
-					<li class="pg-stat">
-						<div class="pg-label">REB</div>
-						<div class="pg-value">10</div>
-					</li>
-					<li class="pg-stat">
-						<div class="pg-label">AST</div>
-						<div class="pg-value">10</div>
-					</li>
-				</ul>
+				{% block latest_stats %}{% endblock %}
 			</div>
+			<div></div>
 			<div class="stats">
-				<div class="reg-season overflow-hidden">
+				<div class="reg-season">
 					<div class="season-label">Regular Season</div>
 					<div class="stat-table">
 						<table>

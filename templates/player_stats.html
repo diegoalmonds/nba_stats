@@ -1,4 +1,23 @@
 {% extends "player_base.html" %}
+{% block latest_stats %}
+    <div class="years">{{ last_season['SEASON_ID'] }}</div>
+    <ul class="per-game-stats">
+        <li class="pg-stat">
+            <div class="pg-label">PTS</div>
+            <div class="pg-value">{{ last_season['PTS'] }}</div>
+        </li>
+        <li class="pg-stat">
+            <div class="pg-label">REB</div>
+            <div class="pg-value">{{ last_season['REB'] }}</div>
+        </li>
+        <li class="pg-stat">
+            <div class="pg-label">AST</div>
+            <div class="pg-value">{{ last_season['AST'] }}</div>
+        </li>
+    </ul>
+{% endblock %} 
+
+
 {% block reg_season_stats %}
     {% for row in reg_season %}
         {% set stats_row = row[1] %}
@@ -28,6 +47,31 @@
             <th>{{ stats_row['PF'] }}</th>
         </tr>
     {% endfor %}
+    <tr>
+        <th>Career</th>
+        <th></th>
+        <th>{{ reg_season_totals['GP'] }}</th>
+        <th>{{ reg_season_totals['GS'] }}</th>
+        <th>{{ reg_season_totals['MIN'] }}</th>
+        <th>{{ reg_season_totals['PTS'] }}</th>
+        <th>{{ reg_season_totals['REB'] }}</th>
+        <th>{{ reg_season_totals['AST'] }}</th>
+        <th>{{ reg_season_totals['STL'] }}</th>
+        <th>{{ reg_season_totals['BLK'] }}</th>
+        <th>{{ reg_season_totals['FGM'] }}</th>
+        <th>{{ reg_season_totals['FGA'] }}</th>
+        <th>{{ reg_season_totals['FG_PCT'] }}</th>
+        <th>{{ reg_season_totals['FG3M'] }}</th>
+        <th>{{ reg_season_totals['FG3A'] }}</th>
+        <th>{{ reg_season_totals['FG3_PCT'] }}</th>
+        <th>{{ reg_season_totals['FTM'] }}</th>
+        <th>{{ reg_season_totals['FTA'] }}</th>
+        <th>{{ reg_season_totals['FT_PCT'] }}</th>
+        <th>{{ reg_season_totals['OREB'] }}</th>
+        <th>{{ reg_season_totals['DREB'] }}</th>
+        <th>{{ reg_season_totals['TOV'] }}</th>
+        <th>{{ reg_season_totals['PF'] }}</th>
+    </tr>
 {% endblock %}
 {% block post_season_stats %}
     {% for row in post_season %}
