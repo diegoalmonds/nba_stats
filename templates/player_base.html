@@ -3,119 +3,32 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<link rel="stylesheet" href="../static/styles.css"/>
+		<link rel="stylesheet" href="../static/player_base.css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	</head>
 	<body>
 		<div class="container">
-			<div class="picture">
-				<img src="https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png"/>
-			</div>
-			<div class="info">
-				<div class="bio">
-					<div class="name">
-						<p id="name">Luka Doncic</p>
-					</div>
-					<div class="team-info">Mavericks</div>
+			<div class="title-card">
+				<div class="picture">
+					<img src="https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png"/>
 				</div>
-				<nav class="nav-bar">
-					<ul class="nav-links">
-						<li><a href="#">Overview</a></li>
-						<li><a href="#">Shotchart</a></li>
-						<li><a href="#">Info</a></li>
-					</ul>
-				</nav>
-			</div>
-			<div class="summary">
-				{% block latest_stats %}{% endblock %}
-			</div>
-			<div class="latest-game">
-				<div id="latest-title">Last Game</div>
-				<div id="latest-stats">
-					<div class="game-info">
-						<div class="opp-logo">
-							<p>vs</p>
-							<img src="../static/team_logos/mavs_logo.svg" alt="">
+				<div class="info">
+					<div class="bio">
+						<div class="name">
+							<p id="name">Luka Doncic</p>
 						</div>
-						<div class="game-result">L 97-108</div>
+						<div class="team-info">Mavericks</div>
 					</div>
-					<div class="game-stats">
-						{% block game_stats %}{% endblock %}
-					</div>
+					<nav class="nav-bar">
+						<ul class="nav-links">
+							<li><a href="#">Overview</a></li>
+							<li><a href="#">Shotchart</a></li>
+							<li><a href="#">Info</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
-			<div class="stats">
-				<div class="reg-season">
-					<div class="season-label">Regular Season</div>
-					<div class="stat-table">
-						<table>
-							<thead>
-								<tr>
-									<th>Season</th>
-									<th>TM</th>
-									<th>GP</th>
-									<th>GS</th>
-									<th>Min</th>
-									<th>PTS</th>
-									<th>REB</th>
-									<th>AST</th>
-									<th>STL</th>
-									<th>BLK</th>
-									<th>FGM</th>
-									<th>FGA</th>
-									<th>FG%</th>
-									<th>3PM</th>
-									<th>3PA</th>
-									<th>3P%</th>
-									<th>FTM</th>
-									<th>FTA</th>
-									<th>FT%</th>
-									<th>OREB</th>
-									<th>DREB</th>
-									<th>TOV</th>
-									<th>PF</th>
-								</tr>
-							</thead>
-							<tbody>{% block reg_season_stats %}{% endblock %}</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="post-season overflow-hidden">
-					<div class="season-label">Post Season</div>
-					<div class="stat-table">
-						<table>
-							<thead>
-								<tr>
-									<th>Season</th>
-									<th>TM</th>
-									<th>GP</th>
-									<th>GS</th>
-									<th>Min</th>
-									<th>PTS</th>
-									<th>REB</th>
-									<th>AST</th>
-									<th>STL</th>
-									<th>BLK</th>
-									<th>FGM</th>
-									<th>FGA</th>
-									<th>FG%</th>
-									<th>3PM</th>
-									<th>3PA</th>
-									<th>3P%</th>
-									<th>FTM</th>
-									<th>FTA</th>
-									<th>FT%</th>
-									<th>TS%</th>
-									<th>OREB</th>
-									<th>DREB</th>
-									<th>TOV</th>
-									<th>PF</th>
-								</tr>
-							</thead>
-							<tbody>{% block post_season_stats %}{% endblock %}</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+			{% block content %}{% endblock %}
 		</div>
 	</body>
 </html>

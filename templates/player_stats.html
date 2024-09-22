@@ -1,125 +1,212 @@
 {% extends "player_base.html" %}
-{% block latest_stats %}
-    <div class="years">{{ last_season['SEASON_ID'] }}</div>
-    <ul class="per-game-stats">
-        <li class="pg-stat">
-            <div class="pg-label">PTS</div>
-            <div class="pg-value">{{ last_season['PTS'] }}</div>
-        </li>
-        <li class="pg-stat">
-            <div class="pg-label">REB</div>
-            <div class="pg-value">{{ last_season['REB'] }}</div>
-        </li>
-        <li class="pg-stat">
-            <div class="pg-label">AST</div>
-            <div class="pg-value">{{ last_season['AST'] }}</div>
-        </li>
-    </ul>
-{% endblock %} 
-
-{% block game_stats %}
-    <ul class="latest-game-stats">
-        <li class="game-stat">
-            <div class="game-label">MINS</div>
-            <div class="game-value">10</div>
-        </li>
-        <li class="game-stat">
-            <div class="game-label">PTS</div>
-            <div class="game-value">10</div>
-        </li>
-        <li class="game-stat">
-            <div class="game-label">REB</div>
-            <div class="game-value">10</div>
-        </li>
-        <li class="game-stat">
-            <div class="game-label">AST</div>
-            <div class="game-value">10</div>
-        </li>
-    </ul>
-{% endblock %}
-
-{% block reg_season_stats %}
-    {% for row in reg_season %}
-        {% set stats_row = row[1] %}
-        <tr>
-            <th>{{ stats_row['SEASON_ID'] }}</th>
-            <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
-            <th>{{ stats_row['GP'] }}</th>
-            <th>{{ stats_row['GS'] }}</th>
-            <th>{{ stats_row['MIN'] }}</th>
-            <th>{{ stats_row['PTS'] }}</th>
-            <th>{{ stats_row['REB'] }}</th>
-            <th>{{ stats_row['AST'] }}</th>
-            <th>{{ stats_row['STL'] }}</th>
-            <th>{{ stats_row['BLK'] }}</th>
-            <th>{{ stats_row['FGM'] }}</th>
-            <th>{{ stats_row['FGA'] }}</th>
-            <th>{{ stats_row['FG_PCT'] }}</th>
-            <th>{{ stats_row['FG3M'] }}</th>
-            <th>{{ stats_row['FG3A'] }}</th>
-            <th>{{ stats_row['FG3_PCT'] }}</th>
-            <th>{{ stats_row['FTM'] }}</th>
-            <th>{{ stats_row['FTA'] }}</th>
-            <th>{{ stats_row['FT_PCT'] }}</th>
-            <th>{{ stats_row['OREB'] }}</th>
-            <th>{{ stats_row['DREB'] }}</th>
-            <th>{{ stats_row['TOV'] }}</th>
-            <th>{{ stats_row['PF'] }}</th>
-        </tr>
-    {% endfor %}
-    <tr>
-        <th>Career</th>
-        <th></th>
-        <th>{{ reg_season_totals['GP'] }}</th>
-        <th>{{ reg_season_totals['GS'] }}</th>
-        <th>{{ reg_season_totals['MIN'] }}</th>
-        <th>{{ reg_season_totals['PTS'] }}</th>
-        <th>{{ reg_season_totals['REB'] }}</th>
-        <th>{{ reg_season_totals['AST'] }}</th>
-        <th>{{ reg_season_totals['STL'] }}</th>
-        <th>{{ reg_season_totals['BLK'] }}</th>
-        <th>{{ reg_season_totals['FGM'] }}</th>
-        <th>{{ reg_season_totals['FGA'] }}</th>
-        <th>{{ reg_season_totals['FG_PCT'] }}</th>
-        <th>{{ reg_season_totals['FG3M'] }}</th>
-        <th>{{ reg_season_totals['FG3A'] }}</th>
-        <th>{{ reg_season_totals['FG3_PCT'] }}</th>
-        <th>{{ reg_season_totals['FTM'] }}</th>
-        <th>{{ reg_season_totals['FTA'] }}</th>
-        <th>{{ reg_season_totals['FT_PCT'] }}</th>
-        <th>{{ reg_season_totals['OREB'] }}</th>
-        <th>{{ reg_season_totals['DREB'] }}</th>
-        <th>{{ reg_season_totals['TOV'] }}</th>
-        <th>{{ reg_season_totals['PF'] }}</th>
-    </tr>
-{% endblock %}
-{% block post_season_stats %}
-    {% for row in post_season %}
-        {% set stats_row = row[1] %}
-        <tr>
-            <th>{{ stats_row['SEASON_ID'] }}</th>
-            <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
-            <th>{{ stats_row['GP'] }}</th>
-            <th>{{ stats_row['GS'] }}</th>
-            <th>{{ stats_row['MIN'] }}</th>
-            <th>{{ stats_row['PTS'] }}</th>
-            <th>{{ stats_row['REB'] }}</th>
-            <th>{{ stats_row['AST'] }}</th>
-            <th>{{ stats_row['STL'] }}</th>
-            <th>{{ stats_row['BLK'] }}</th>
-            <th>{{ stats_row['FGM'] }}</th>
-            <th>{{ stats_row['FGA'] }}</th>
-            <th>{{ stats_row['FG_PCT'] }}</th>
-            <th>{{ stats_row['FG3M'] }}</th>
-            <th>{{ stats_row['FG3A'] }}</th>
-            <th>{{ stats_row['FG3_PCT'] }}</th>
-            <th>{{ stats_row['FTM'] }}</th>
-            <th>{{ stats_row['FTA'] }}</th>
-            <th>{{ stats_row['FT_PCT'] }}</th>
-            <th>{{ stats_row['OREB'] }}</th>
-            <th>{{ stats_row['DREB'] }}</th>
-            <th>{{ stats_row['TOV'] }}</th>
-            <th>{{ stats_row['PF'] }}</th>
-        </tr>
-    {% endfor %}
+{% block content %}
+    <div class="content-container">
+        <div class="summary">
+            <div class="years">{{ last_season['SEASON_ID'] }}</div>
+            <ul class="per-game-stats">
+                <li class="pg-stat">
+                    <div class="pg-label">PTS</div>
+                    <div class="pg-value">{{ last_season['PTS'] }}</div>
+                </li>
+                <li class="pg-stat">
+                    <div class="pg-label">REB</div>
+                    <div class="pg-value">{{ last_season['REB'] }}</div>
+                </li>
+                <li class="pg-stat">
+                    <div class="pg-label">AST</div>
+                    <div class="pg-value">{{ last_season['AST'] }}</div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="latest-game">
+            <div id="latest-title">Last Game</div>
+            <div id="latest-stats">
+                <div class="game-info">
+                    <div class="opp-logo">
+                        <p>vs</p>
+                        <img src="../static/team_logos/mavs_logo.svg" alt="">
+                    </div>
+                    <div class="game-result">L 97-108</div>
+                </div>
+                <div class="game-stats">
+                    <ul class="latest-game-stats">
+                        <li class="game-stat">
+                            <div class="game-label">MINS</div>
+                            <div class="game-value">10</div>
+                        </li>
+                        <li class="game-stat">
+                            <div class="game-label">PTS</div>
+                            <div class="game-value">10</div>
+                        </li>
+                        <li class="game-stat">
+                            <div class="game-label">REB</div>
+                            <div class="game-value">10</div>
+                        </li>
+                        <li class="game-stat">
+                            <div class="game-label">AST</div>
+                            <div class="game-value">10</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="reg-season">
+                <div class="season-label">Regular Season</div>
+                <div class="stat-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Season</th>
+                                <th>TM</th>
+                                <th>GP</th>
+                                <th>GS</th>
+                                <th>Min</th>
+                                <th>PTS</th>
+                                <th>REB</th>
+                                <th>AST</th>
+                                <th>STL</th>
+                                <th>BLK</th>
+                                <th>FGM</th>
+                                <th>FGA</th>
+                                <th>FG%</th>
+                                <th>3PM</th>
+                                <th>3PA</th>
+                                <th>3P%</th>
+                                <th>FTM</th>
+                                <th>FTA</th>
+                                <th>FT%</th>
+                                <th>OREB</th>
+                                <th>DREB</th>
+                                <th>TOV</th>
+                                <th>PF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in reg_season %}
+                                {% set stats_row = row[1] %}
+                                <tr>
+                                    <th>{{ stats_row['SEASON_ID'] }}</th>
+                                    <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
+                                    <th>{{ stats_row['GP'] }}</th>
+                                    <th>{{ stats_row['GS'] }}</th>
+                                    <th>{{ stats_row['MIN'] }}</th>
+                                    <th>{{ stats_row['PTS'] }}</th>
+                                    <th>{{ stats_row['REB'] }}</th>
+                                    <th>{{ stats_row['AST'] }}</th>
+                                    <th>{{ stats_row['STL'] }}</th>
+                                    <th>{{ stats_row['BLK'] }}</th>
+                                    <th>{{ stats_row['FGM'] }}</th>
+                                    <th>{{ stats_row['FGA'] }}</th>
+                                    <th>{{ stats_row['FG_PCT'] }}</th>
+                                    <th>{{ stats_row['FG3M'] }}</th>
+                                    <th>{{ stats_row['FG3A'] }}</th>
+                                    <th>{{ stats_row['FG3_PCT'] }}</th>
+                                    <th>{{ stats_row['FTM'] }}</th>
+                                    <th>{{ stats_row['FTA'] }}</th>
+                                    <th>{{ stats_row['FT_PCT'] }}</th>
+                                    <th>{{ stats_row['OREB'] }}</th>
+                                    <th>{{ stats_row['DREB'] }}</th>
+                                    <th>{{ stats_row['TOV'] }}</th>
+                                    <th>{{ stats_row['PF'] }}</th>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th>Career</th>
+                                <th></th>
+                                <th>{{ reg_season_totals['GP'] }}</th>
+                                <th>{{ reg_season_totals['GS'] }}</th>
+                                <th>{{ reg_season_totals['MIN'] }}</th>
+                                <th>{{ reg_season_totals['PTS'] }}</th>
+                                <th>{{ reg_season_totals['REB'] }}</th>
+                                <th>{{ reg_season_totals['AST'] }}</th>
+                                <th>{{ reg_season_totals['STL'] }}</th>
+                                <th>{{ reg_season_totals['BLK'] }}</th>
+                                <th>{{ reg_season_totals['FGM'] }}</th>
+                                <th>{{ reg_season_totals['FGA'] }}</th>
+                                <th>{{ reg_season_totals['FG_PCT'] }}</th>
+                                <th>{{ reg_season_totals['FG3M'] }}</th>
+                                <th>{{ reg_season_totals['FG3A'] }}</th>
+                                <th>{{ reg_season_totals['FG3_PCT'] }}</th>
+                                <th>{{ reg_season_totals['FTM'] }}</th>
+                                <th>{{ reg_season_totals['FTA'] }}</th>
+                                <th>{{ reg_season_totals['FT_PCT'] }}</th>
+                                <th>{{ reg_season_totals['OREB'] }}</th>
+                                <th>{{ reg_season_totals['DREB'] }}</th>
+                                <th>{{ reg_season_totals['TOV'] }}</th>
+                                <th>{{ reg_season_totals['PF'] }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="post-season overflow-hidden">
+                <div class="season-label">Post Season</div>
+                <div class="stat-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Season</th>
+                                <th>TM</th>
+                                <th>GP</th>
+                                <th>GS</th>
+                                <th>Min</th>
+                                <th>PTS</th>
+                                <th>REB</th>
+                                <th>AST</th>
+                                <th>STL</th>
+                                <th>BLK</th>
+                                <th>FGM</th>
+                                <th>FGA</th>
+                                <th>FG%</th>
+                                <th>3PM</th>
+                                <th>3PA</th>
+                                <th>3P%</th>
+                                <th>FTM</th>
+                                <th>FTA</th>
+                                <th>FT%</th>
+                                <th>TS%</th>
+                                <th>OREB</th>
+                                <th>DREB</th>
+                                <th>TOV</th>
+                                <th>PF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in post_season %}
+                                {% set stats_row = row[1] %}
+                                <tr>
+                                    <th>{{ stats_row['SEASON_ID'] }}</th>
+                                    <th>{{ stats_row['TEAM_ABBREVIATION'] }}</th>
+                                    <th>{{ stats_row['GP'] }}</th>
+                                    <th>{{ stats_row['GS'] }}</th>
+                                    <th>{{ stats_row['MIN'] }}</th>
+                                    <th>{{ stats_row['PTS'] }}</th>
+                                    <th>{{ stats_row['REB'] }}</th>
+                                    <th>{{ stats_row['AST'] }}</th>
+                                    <th>{{ stats_row['STL'] }}</th>
+                                    <th>{{ stats_row['BLK'] }}</th>
+                                    <th>{{ stats_row['FGM'] }}</th>
+                                    <th>{{ stats_row['FGA'] }}</th>
+                                    <th>{{ stats_row['FG_PCT'] }}</th>
+                                    <th>{{ stats_row['FG3M'] }}</th>
+                                    <th>{{ stats_row['FG3A'] }}</th>
+                                    <th>{{ stats_row['FG3_PCT'] }}</th>
+                                    <th>{{ stats_row['FTM'] }}</th>
+                                    <th>{{ stats_row['FTA'] }}</th>
+                                    <th>{{ stats_row['FT_PCT'] }}</th>
+                                    <th>{{ stats_row['OREB'] }}</th>
+                                    <th>{{ stats_row['DREB'] }}</th>
+                                    <th>{{ stats_row['TOV'] }}</th>
+                                    <th>{{ stats_row['PF'] }}</th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
