@@ -1,9 +1,9 @@
 {% extends "player_base.html" %}
 {% block content %}
-    <div class="content-container">
-        <div class="summary">
-            <div class="years">{{ last_season['SEASON_ID'] }}</div>
-            <ul class="per-game-stats">
+    <div class="grid content-container">
+        <div class="grid player-pra">
+            <div class="margin-center years">{{ last_season['SEASON_ID'] }}</div>
+            <ul class="flex-col per-game-stats">
                 <li class="pg-stat">
                     <div class="pg-label">PTS</div>
                     <div class="pg-value">{{ last_season['PTS'] }}</div>
@@ -18,44 +18,42 @@
                 </li>
             </ul>
         </div>
-        
-        <div class="latest-game">
+        <div class="flex-col full-height latest-game">
             <div id="latest-title">Last Game</div>
-            <div id="latest-stats">
-                <div class="game-info">
-                    <div class="opp-logo">
-                        <p>vs</p>
+            <div class="flex full-height latest-game-content">
+                <div class="margin-center opp-info">
+                    <div class="flex opp-logo">
+                        <p class="margin-center">vs</p>
                         <img src="../static/team_logos/mavs_logo.svg" alt="">
                     </div>
-                    <div class="game-result">L 97-108</div>
+                    <div class="latest-game-result">L 97-108</div>
                 </div>
-                <div class="game-stats">
-                    <ul class="latest-game-stats">
+                <div class="flex full-width latest-game-stats">
+                    <ul class="flex full-width latest-stats-list">
                         <li class="game-stat">
-                            <div class="game-label">MINS</div>
-                            <div class="game-value">10</div>
+                            <div class="game-stat-label">MINS</div>
+                            <div class="game-stat-value">10</div>
                         </li>
                         <li class="game-stat">
-                            <div class="game-label">PTS</div>
-                            <div class="game-value">10</div>
+                            <div class="game-stat-label">PTS</div>
+                            <div class="game-stat-value">10</div>
                         </li>
                         <li class="game-stat">
-                            <div class="game-label">REB</div>
-                            <div class="game-value">10</div>
+                            <div class="game-stat-label">REB</div>
+                            <div class="game-stat-value">10</div>
                         </li>
                         <li class="game-stat">
-                            <div class="game-label">AST</div>
-                            <div class="game-value">10</div>
+                            <div class="game-stat-label">AST</div>
+                            <div class="game-stat-value">10</div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        
-        <div class="stats">
+        <div class="flex-col stats">
             <div class="reg-season">
                 <div class="season-label">Regular Season</div>
-                <div class="stat-table">
+                <div class="full-width full-height stat-table">
                     <table>
                         <thead>
                             <tr>
@@ -142,7 +140,7 @@
                     </table>
                 </div>
             </div>
-            <div class="post-season overflow-hidden">
+            <div class="post-season">
                 <div class="season-label">Post Season</div>
                 <div class="stat-table">
                     <table>
