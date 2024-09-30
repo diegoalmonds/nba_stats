@@ -1,0 +1,26 @@
+{% extends "player_team_base.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../static/player_shotcharts.css"/>
+{% endblock %}
+
+{% block page_navbar %}
+    <li><a href="#">Overview</a></li>
+    <li><a href="#">Shotchart</a></li>
+    <li><a href="#">Info</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="flex content-container">
+        <div class="shotchart">
+            <p>Title</p>
+            <img src="c:\Users\mmdie\AppData\Local\Temp\ldDt0LQiCmRv2LZglwu59ZJIKq7Exvvhhw.png" alt="">
+            <p>other stuff</p>
+        </div>
+        <div class="heatmap">
+            <p>Title</p>
+            <img src="c:\Users\mmdie\AppData\Local\Temp\shai-shot-chart.png" alt="">
+            <p>other stuff</p>
+        </div>
+    </div>
+{% endblock %}

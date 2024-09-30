@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<link rel="stylesheet" href="../static/player_stats.css"/>
-		<link rel="stylesheet" href="../static/player_base.css"/>
+		<link rel="stylesheet" href="../static/player_team_base.css"/>
+		{% block stylesheets %}{% endblock %}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	</head>
 	<body>
@@ -21,9 +21,7 @@
 					</div>
 					<nav class="player-nav-bar">
 						<ul class="flex player-nav-links">
-							<li><a href="#">Overview</a></li>
-							<li><a href="#">Shotchart</a></li>
-							<li><a href="#">Info</a></li>
+							{% block page_navbar %}{% endblock %}
 						</ul>
 					</nav>
 				</div>

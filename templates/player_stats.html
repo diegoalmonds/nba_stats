@@ -1,4 +1,15 @@
-{% extends "player_base.html" %}
+{% extends "player_team_base.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../static/player_stats.css"/>
+{% endblock %}
+
+{% block page_navbar %}
+    <li><a href="#">Overview</a></li>
+    <li><a href="#">Shotchart</a></li>
+    <li><a href="#">Info</a></li>
+{% endblock %}
+
 {% block content %}
     <div class="grid content-container">
         <div class="grid player-pra">
