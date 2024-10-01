@@ -1,0 +1,30 @@
+{% extends "player_team_base.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../static/player_stats.css"/>
+    <link rel="stylesheet" href="../static/team_schedule.css"/>
+{% endblock %}
+
+{% block page_navbar %}
+    <li><a href="#">Overview</a></li>
+    <li><a href="#">Schedule</a></li>
+    <li><a href="#">Info</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="flex-col">
+        <div class="schedule-title">Dallas Mavericks Schedule</div>
+        <div class="schedule-options">
+            <form action="nothing">
+                <select name="season" id="season"></select>
+                <select name="season-type" id="season-type"></select>
+            </form>
+        </div>
+        <p>Regular Season</p>
+        <div class="schedule">
+            <table>
+                <!-- for each game, display date, opponent, away vs home, game result, record after game -->
+            </table>
+        </div>
+    </div>
+{% endblock %}
