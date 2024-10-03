@@ -1,4 +1,4 @@
-from nba_api.stats.endpoints import playercareerstats, playerdashboardbyyearoveryear, alltimeleadersgrids, teamdashboardbyshootingsplits, playerdashboardbyshootingsplits, playergamelog, shotchartdetail
+from nba_api.stats.endpoints import playercareerstats, playerdashboardbyyearoveryear, alltimeleadersgrids, teamdashboardbyshootingsplits, playerdashboardbyshootingsplits, shotchartdetail, teamgamelog
 from nba_api.stats.static import teams, players
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc, Circle, Rectangle
@@ -251,3 +251,13 @@ def player_shooting_heatmap(player, season, team_id):
     sns.heatmap(coords_df, cmap='magma', square=True)
     ax.axis(False)
     ax.set_title(f'{player} Shooting Heatmap')
+    
+def get_team_schedule(team, season, season_type):
+    schedule = []
+    team_id = get_team_id(team)
+    schedule_dataframe = teamgamelog.TeamGameLog(season=season, season_type_all_star=season_type, team_id=team_id).get_data_frames()[0].iloc[::-1]
+    for index, game in schedule_dataframe.iterrows():
+        away_or_home = game['MATCHUP'][game['MATCHUP'].index(' ')+1:game['MATCHUP'].rfind(' ')]
+        matchup_info = (game['GAME_DATE'], game['MATCHUP'][game['MATCHUP'].rfind(' ')+1:], away_or_home, game['WL'], f"{game['W']}-{game['L']}")
+        schedule.append(matchup_info)
+    return schedule
