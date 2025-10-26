@@ -13,7 +13,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Button } from "@/components/ui/button"
 
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronsUpDown, House, Clock } from "lucide-react"
 import { cn } from "@/lib/utils";
 
 type Status = {
@@ -45,8 +45,12 @@ const frameworks = [
 
 export default function Player() {
     const [playerData, setPlayerData] = useState({})
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
+    const [openTeam, setOpenTeam] = useState(false)
+    const [openCourt, setOpenCourt] = useState(false);
+    const [openLast, setOpenLast] = useState(false);
+    const [vsTeamValue, setVsTeamValue] = useState("");
+    const [courtValue, setCourtValue] = useState("");
+    const [lastXValue, setLastXValue] = useState("");
 
     const initData = () => {
 
@@ -89,27 +93,108 @@ export default function Player() {
                     Player Name
                 </div>
             </div>
-            <div className='grid grid-cols-4 mt-4'>
-                <div className="flex flex-col">
-                    <div>testing</div>
-                    <div>testing</div>
+            <div className='grid grid-cols-4 mt-4 gap-4'>
+                <div className="flex flex-col gap-4">
+                    <Card>
+                        <CardHeader>
+                            next game
+                        </CardHeader>
+                        <CardContent>
+                            <div className="flex items-center gap-2">
+                                <img className="h-16 w-16" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/dal.png" alt="logo" />
+                                <p>vs. Dallas Mavericks</p>
+                            </div>
+                            <div className="flex items-center text-xs text-gray">
+                                <div className="flex items-center">
+                                    <House className="ml-auto"/>
+                                    <p>American Airlines Center</p>
+                                </div>
+                                <div className="flex items-center">
+                                    <Clock className="ml-auto"/>
+                                    <p>Sun, Oct. 26 @ 7:30 PM EST</p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            last 5 games box scores
+                        </CardHeader>
+                        <CardContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-[100px]">Opponent</TableHead>
+                                        <TableHead>PTS</TableHead>
+                                        <TableHead>REB</TableHead>
+                                        <TableHead>ASTS</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell className="font-medium">INV001</TableCell>
+                                        <TableCell>Paid</TableCell>
+                                        <TableCell>C</TableCell>
+                                        <TableCell className="text-right">$250.00</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell className="font-medium">INV001</TableCell>
+                                        <TableCell>Paid</TableCell>
+                                        <TableCell>C</TableCell>
+                                        <TableCell className="text-right">$250.00</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            team standings
+                        </CardHeader>
+                        <CardContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-[100px]">Opponent</TableHead>
+                                        <TableHead>PTS</TableHead>
+                                        <TableHead>REB</TableHead>
+                                        <TableHead>ASTS</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell className="font-medium">INV001</TableCell>
+                                        <TableCell>Paid</TableCell>
+                                        <TableCell>C</TableCell>
+                                        <TableCell className="text-right">$250.00</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell className="font-medium">INV001</TableCell>
+                                        <TableCell>Paid</TableCell>
+                                        <TableCell>C</TableCell>
+                                        <TableCell className="text-right">$250.00</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
                 </div>
                 <div className="col-span-3">
                     <Card>
                         <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
                             <div>
                                 <div className="flex items-center space-x-4">
-                                    <p className="text-muted-foreground text-sm">Status</p>
-                                    <Popover open={open} onOpenChange={setOpen}>
+                                    <p className="text-muted-foreground text-sm">vs.</p>
+                                    <Popover open={openTeam} onOpenChange={setOpenTeam}>
                                         <PopoverTrigger asChild>
                                             <Button
                                             variant="outline"
                                             role="combobox"
-                                            aria-expanded={open}
+                                            aria-expanded={openTeam}
                                             className="w-[200px] justify-between"
                                             >
-                                            {value
-                                                ? frameworks.find((framework) => framework.value === value)?.label
+                                            {vsTeamValue
+                                                ? frameworks.find((framework) => framework.value === vsTeamValue)?.label
                                                 : "Select framework..."}
                                             <ChevronsUpDown className="opacity-50" />
                                             </Button>
@@ -125,15 +210,15 @@ export default function Player() {
                                                     key={framework.value}
                                                     value={framework.value}
                                                     onSelect={(currentValue) => {
-                                                        setValue(currentValue === value ? "" : currentValue)
-                                                        setOpen(false)
+                                                        setVsTeamValue(currentValue === vsTeamValue ? "" : currentValue)
+                                                        setOpenTeam(false)
                                                     }}
                                                     >
                                                     {framework.label}
                                                     <Check
                                                         className={cn(
                                                             "ml-auto",
-                                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                                            vsTeamValue === framework.value ? "opacity-100" : "opacity-0"
                                                         )}
                                                     />
                                                     </CommandItem>
@@ -143,6 +228,116 @@ export default function Player() {
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
+                                    <p className="text-muted-foreground text-sm">Court</p>
+                                    {/* <Popover open={openCourt} onOpenChange={setOpenCourt}>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            aria-expanded={openCourt}
+                                            className="w-[200px] justify-between"
+                                            >
+                                            {courtValue
+                                                ? frameworks.find((framework) => framework.value === courtValue)?.label
+                                                : "Select framework..."}
+                                            <ChevronsUpDown className="opacity-50" />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-[200px] p-0">
+                                            <Command>
+                                            <CommandInput placeholder="Search framework..." className="h-9" />
+                                            <CommandList>
+                                                <CommandEmpty>No framework found.</CommandEmpty>
+                                                <CommandGroup>
+                                                {frameworks.map((framework) => (
+                                                    <CommandItem
+                                                    key={framework.value}
+                                                    value={framework.value}
+                                                    onSelect={(currentValue) => {
+                                                        setCourtValue(currentValue === courtValue ? "" : currentValue)
+                                                        setOpenCourt(false)
+                                                    }}
+                                                    >
+                                                    {framework.label}
+                                                    <Check
+                                                        className={cn(
+                                                            "ml-auto",
+                                                            courtValue === framework.value ? "opacity-100" : "opacity-0"
+                                                        )}
+                                                    />
+                                                    </CommandItem>
+                                                ))}
+                                                </CommandGroup>
+                                            </CommandList>
+                                            </Command>
+                                        </PopoverContent>
+                                    </Popover> */}
+                                    <Select>
+                                        <SelectTrigger className="font-semibold !text-black">
+                                            <SelectValue placeholder="Select a team" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="lakers">Los Angeles Lakers</SelectItem>
+                                            <SelectItem value="mavs">Dallas Mavericks</SelectItem>
+                                            <SelectItem value="dubs">Golden State Warriors</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <p className="text-muted-foreground text-sm">Last x</p>
+                                    {/* <Popover open={openLast} onOpenChange={setOpenLast}>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            aria-expanded={openLast}
+                                            className="w-[200px] justify-between"
+                                            >
+                                            {lastXValue
+                                                ? frameworks.find((framework) => framework.value === lastXValue)?.label
+                                                : "Select framework..."}
+                                            <ChevronsUpDown className="opacity-50" />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-[200px] p-0">
+                                            <Command>
+                                            <CommandInput placeholder="Search framework..." className="h-9" />
+                                            <CommandList>
+                                                <CommandEmpty>No framework found.</CommandEmpty>
+                                                <CommandGroup>
+                                                {frameworks.map((framework) => (
+                                                    <CommandItem
+                                                    key={framework.value}
+                                                    value={framework.value}
+                                                    onSelect={(currentValue) => {
+                                                        setLastXValue(currentValue === lastXValue ? "" : currentValue)
+                                                        setOpenLast(false)
+                                                    }}
+                                                    >
+                                                    {framework.label}
+                                                    <Check
+                                                        className={cn(
+                                                            "ml-auto",
+                                                            lastXValue === framework.value ? "opacity-100" : "opacity-0"
+                                                        )}
+                                                    />
+                                                    </CommandItem>
+                                                ))}
+                                                </CommandGroup>
+                                            </CommandList>
+                                            </Command>
+                                        </PopoverContent>
+                                    </Popover> */}
+                                    <Select>
+                                        <SelectTrigger className="font-semibold !text-black">
+                                            <SelectValue placeholder="Select a team" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="lakers">Los Angeles Lakers</SelectItem>
+                                            <SelectItem value="mavs">Dallas Mavericks</SelectItem>
+                                            <SelectItem value="dubs">Golden State Warriors</SelectItem>
+                                            <SelectItem value="bla">Portland Trail Blazers</SelectItem>
+                                            <SelectItem value="timbs">Minnesota Timberwolves</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </div>
                         </CardHeader>
@@ -160,7 +355,6 @@ export default function Player() {
                                     <ChartTooltip content={<ChartTooltipContent />} />
                                     <ChartLegend content={<ChartLegendContent />} />
                                     <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-                                    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
                                 </BarChart>
                             </ChartContainer>
                         </CardContent>
