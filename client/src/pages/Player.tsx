@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button"
 
 import { Check, ChevronsUpDown, House, Clock } from "lucide-react"
 import { cn } from "@/lib/utils";
+import apiHelper from "@/helpers/apiHelper";
 
 type Status = {
   value: string
@@ -42,6 +43,8 @@ const frameworks = [
     label: "Astro",
   },
 ]
+
+const api = new apiHelper()
 
 export default function Player() {
     const [playerData, setPlayerData] = useState({})
@@ -98,6 +101,13 @@ export default function Player() {
                     <Card>
                         <CardHeader>
                             next game
+                            <Button 
+                                onClick={async () => {
+                                    const data = await api.getPlayers();
+                                    console.log(data);
+                                }}
+                            >
+                            </Button>
                         </CardHeader>
                         <CardContent>
                             <div className="flex items-center gap-2">

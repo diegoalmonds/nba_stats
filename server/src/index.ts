@@ -1,8 +1,13 @@
 import express from 'express'
 import playersRouter from './routes/players';
-import axios from 'axios';
+import cors from "cors";
 
 const app = express()
+
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend URL
+  credentials: true,               // if you need cookies/auth
+}));
 
 const PORT = 3000;
 
