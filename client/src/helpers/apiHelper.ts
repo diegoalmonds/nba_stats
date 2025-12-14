@@ -9,8 +9,28 @@ export default class apiHelper {
         this.url = baseUrl;
     }
 
-    async getPlayers() {
-        const res = await axios.get(`${this.url}/players`);
+    async getPlayerById(id: string) {
+        const res = await axios.get(`${this.url}/players/${id}`);
+        return res.data;
+    }
+
+    async getPlayerByName(name: string) {
+        const res = await axios.get(`${this.url}/players/${name}`);
+        return res;
+    }
+
+    async getPlayerTeam(id: string) {
+        const res = await axios.get(`${this.url}/players/team/${id}`);
+        return res.data;
+    }
+
+    async getPlayerGameLog(params: object) {
+        const res = await axios.get(`${this.url}/players/gamelog`, { params });
+        return res.data;
+    }
+
+    async getPlayerNextGame(params: object) {
+        const res = await axios.get(`${this.url}/players/nextgames`, { params });
         return res.data;
     }
 }

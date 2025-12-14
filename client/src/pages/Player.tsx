@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useEffect, useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom"
 
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -47,16 +48,47 @@ const frameworks = [
 const api = new apiHelper()
 
 export default function Player() {
+    const { id } = useParams();
+    const { search } = useLocation();
+    const query = new URLSearchParams(search);
+    const tab = query.get("tab");
+    
     const [playerData, setPlayerData] = useState({})
+    const [playerTeam, setPlayerTeam] = useState("")
     const [openTeam, setOpenTeam] = useState(false)
     const [openCourt, setOpenCourt] = useState(false);
     const [openLast, setOpenLast] = useState(false);
     const [vsTeamValue, setVsTeamValue] = useState("");
     const [courtValue, setCourtValue] = useState("");
     const [lastXValue, setLastXValue] = useState("");
+    const [nextGameData, setNextGameData] = useState({});
+    const [boxScoreLastGames, setBoxScoreLastGames] = useState([]);
 
-    const initData = () => {
+    const initData = async () => {
+        const playerInfo = await api.getPlayerById(id ?? "");
+        setPlayerData(playerInfo)
+        const playerTeamInfo = await api.getPlayerTeam(id ?? "");
+        console.log(playerTeamInfo)
+        setPlayerTeam(playerTeamInfo[0].team_abbreviation)
+        const nextGame = await api.getPlayerNextGame(
+            {
+                id: id,
+                season: "2025-26",
+                season_type: "Regular Season"
+            }
+        )
+        setNextGameData(nextGame[0])
 
+        const boxLastGames = await api.getPlayerGameLog(
+            {
+                id: id,
+                season: "2025-26",
+                season_type: null,
+                opponent_team_id: null,
+                location: null,
+            }
+        )
+        setBoxScoreLastGames(boxLastGames.slice(0, 5))
     }
 
     const chartData = [
@@ -85,6 +117,22 @@ export default function Player() {
         initData()
     }, [])
 
+    useEffect(() => {
+        console.log(nextGameData);
+    }, [nextGameData])
+
+    useEffect(() => {
+        console.log(boxScoreLastGames);
+    }, [boxScoreLastGames])
+
+    useEffect(() => {
+        console.log(playerData);
+    }, [playerData])
+
+    useEffect(() => {
+        console.log(playerTeam);
+    }, [playerTeam])
+
     return (
         <div className="w-full">
             <div className="flex items-center">
@@ -103,7 +151,7 @@ export default function Player() {
                             next game
                             <Button 
                                 onClick={async () => {
-                                    const data = await api.getPlayers();
+                                    const data = await api.getPlayerById("2544");
                                     console.log(data);
                                 }}
                             >
@@ -112,7 +160,7 @@ export default function Player() {
                         <CardContent>
                             <div className="flex items-center gap-2">
                                 <img className="h-16 w-16" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/dal.png" alt="logo" />
-                                <p>vs. Dallas Mavericks</p>
+                                <p>{nextGameData.home_team_name}</p>
                             </div>
                             <div className="flex items-center text-xs text-gray">
                                 <div className="flex items-center">
@@ -141,18 +189,14 @@ export default function Player() {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell className="font-medium">INV001</TableCell>
-                                        <TableCell>Paid</TableCell>
-                                        <TableCell>C</TableCell>
-                                        <TableCell className="text-right">$250.00</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell className="font-medium">INV001</TableCell>
-                                        <TableCell>Paid</TableCell>
-                                        <TableCell>C</TableCell>
-                                        <TableCell className="text-right">$250.00</TableCell>
-                                    </TableRow>
+                                    {boxScoreLastGames.map((game, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{game.matchup}</TableCell>
+                                            <TableCell>{game.pts}</TableCell>
+                                            <TableCell>{game.reb}</TableCell>
+                                            <TableCell>{game.ast}</TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </CardContent>
@@ -351,7 +395,7 @@ export default function Player() {
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent> {/* main filters: stat (PTS, REB, etc.), last x, line*/} {/* advanced filters: vs team, court, without players*/}
                             <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
                                 <BarChart accessibilityLayer data={chartData}>
                                     <CartesianGrid vertical={false} />

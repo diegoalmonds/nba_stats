@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { getPlayer, getPlayers } from "../controllers/players";
+import { getBasicGameLog, getGameLog, getPlayerById, getPlayerByName, getPlayerNextGame, getPlayerTeam } from "../controllers/players";
 
 const router = Router();
 
-router.get("/", getPlayers);
-router.get("/:id", getPlayer);
+router.get("/nextgames", getPlayerNextGame);
+router.get("/gamelog", getGameLog);
+router.get("/:id", getPlayerById);
+router.get("/team/:id", getPlayerTeam);
+router.get("/name/:name", getPlayerByName);
+
 
 export default router;
